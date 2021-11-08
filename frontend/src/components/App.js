@@ -213,6 +213,7 @@ function App() {
                 setEmail(res.data);
             })
             .catch((err) => {
+                setLoggedIn(false);
                 console.log(err)
             })
             .finally(() => {
@@ -222,7 +223,7 @@ function App() {
 
     useEffect(() => {
             checkToken();
-            history.push('/');
+            loggedIn ? history.push('/') : history.push('/sign-in');
     }, []);
 
     return (
