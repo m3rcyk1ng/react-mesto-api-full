@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -101,11 +102,13 @@ module.exports.updateProfileAvatar = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
-  User.findOne({ email }).select('+password')
+  User.findOne({ email })
+    .select('+password')
     .then((user) => {
       if (!user) {
         throw new UnauthorizedError('Передан неверный логин или пароль');
       }
+
       return bcrypt.compare(password, user.password)
 
         // eslint-disable-next-line consistent-return
@@ -114,13 +117,22 @@ module.exports.login = (req, res, next) => {
             // хеши не совпали — отклоняем промис
             throw new UnauthorizedError('Передан неверный логин или пароль');
           }
+          const { NODE_ENV, JWT_SECRET } = process.env;
           const token = jwt.sign(
             { _id: user._id },
-            'some-secret-key',
+            NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key',
             { expiresIn: '7d' },
           );
           // аутентификация успешна
-          res.send({ token });
+          return res
+            // отправляем jwt в cookie для защиты от XSS-атаки.
+            .cookie('jwt', token, {
+              maxAge: 3600000 * 24 * 7,
+              httpOnly: true,
+              secure: true,
+              sameSite: 'none',
+            })
+            .send({ message: 'Вход совершен успешно' });
         })
         .catch(next);
     })

@@ -6,6 +6,7 @@ class ApiAuth {
     userLogin(data) {
         return fetch(`${this._url}/signin`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -48,12 +49,12 @@ class ApiAuth {
             })
     }
 
-    checkToken(token) {
+    checkToken() {
         return fetch(`${this._url}/users/me`, {
             method: 'GET',
+            credentials: 'include',
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                "Content-Type": "application/json"
             }
         })
                 .then((data) => {
@@ -70,5 +71,5 @@ class ApiAuth {
 }
 
 export const apiAuth = new ApiAuth({
-    baseUrl: 'https://auth.nomoreparties.co.'
+    baseUrl: 'https://api.debugger.nomoredomains.rocks'
 })

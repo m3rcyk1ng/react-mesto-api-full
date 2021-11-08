@@ -7,6 +7,7 @@ export default class Api {
     getInitialCards() {
         return fetch(`${this._link}/cards`, {
             headers: this._token,
+            credentials: 'include',
         })
             .then(this._checkStatus);
     }
@@ -14,6 +15,7 @@ export default class Api {
     getUserInfo() {
         return fetch(`${this._link}/users/me`, {
             headers: this._token,
+            credentials: 'include',
         })
             .then(this._checkStatus);
     }
@@ -21,6 +23,7 @@ export default class Api {
     updateUserInfo(profile) {
         return fetch(`${this._link}/users/me`, {
             method: 'PATCH',
+            credentials: 'include',
             headers: this._token,
             body: JSON.stringify({
                 name: profile.name,
@@ -34,6 +37,7 @@ export default class Api {
         return fetch(`${this._link}/cards`, {
             method: 'POST',
             headers: this._token,
+            credentials: 'include',
             body: JSON.stringify({
                 name: card.name,
                 link: card.link
@@ -50,9 +54,10 @@ export default class Api {
     }
 
     changeLikeCardStatus(cardId, isLiked) {
-        return fetch(`${this._link}/cards/likes/${cardId}`, {
+        return fetch(`${this._link}/cards/${cardId}/likes`, {
             method: `${isLiked ? 'DELETE' : 'PUT'}`,
             headers: this._token,
+            credentials: 'include',
         })
             .then(this._checkStatus);
     }
@@ -61,6 +66,7 @@ export default class Api {
         return fetch(`${this._link}/cards/${cardId}`, {
             method: 'DELETE',
             headers: this._token,
+            credentials: 'include',
         })
             .then(this._checkStatus);
     }
@@ -69,6 +75,7 @@ export default class Api {
         return fetch(`${this._link}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._token,
+            credentials: 'include',
             body: JSON.stringify(avatar)
         })
             .then(this._checkStatus);
@@ -76,9 +83,8 @@ export default class Api {
 }
 
 export const api = new Api({
-    link: 'https://mesto.nomoreparties.co/v1/cohort-26',
+    link: 'https://api.debugger.nomoredomains.rocks',
     token: {
-        authorization: 'abf7489c-028b-40af-8a54-88899dd941f0',
         'Content-Type': 'application/json',
     },
 });

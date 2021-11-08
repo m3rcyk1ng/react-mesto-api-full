@@ -38,7 +38,7 @@ function App() {
     function handleUpdateUser(profile) {
         api
             .updateUserInfo(profile)
-            .then((res) => {
+            .then(({data: res}) => {
                 setCurrentUser(res);
                 closeAllPopups();
             })
@@ -50,7 +50,7 @@ function App() {
         api
             .getUserInfo()
             .then((res) => {
-                setCurrentUser(res);
+                setCurrentUser(res.data);
             })
             .catch((rej) => console.log(rej))
     }, []);
@@ -61,7 +61,7 @@ function App() {
         api
             .getInitialCards()
             .then((res) => {
-                setCards(res)
+                setCards(res.data)
             })
             .catch((rej) => console.log(rej));
     }, []);
@@ -108,8 +108,8 @@ function App() {
     function handleAddPlaceSubmit(card) {
         api
             .addNewCard(card)
-            .then((res) => {
-                setCards([res, ...cards]);
+            .then(({data}) => {
+                setCards([data, ...cards]);
                 closeAllPopups();
             })
             .catch((rej) => console.log(rej))
@@ -118,7 +118,7 @@ function App() {
     function handleUpdateAvatar(profile) {
         api
             .updateAvatar(profile)
-            .then((res) => {
+            .then(({data: res}) => {
                 setCurrentUser(res);
                 closeAllPopups();
             })
@@ -127,11 +127,11 @@ function App() {
 
     function handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.some(i => i === currentUser._id);
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
         api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
         })
             .catch((rej) => console.log(rej));
     }
@@ -154,11 +154,8 @@ function App() {
         setIsLoading(true);
         apiAuth.userLogin(data)
             .then((res) => {
-                    if (res.token) {
-                        localStorage.setItem('token', res.token);
-                        setLoggedIn(true);
-                        setEmail(data);
-                        history.push('/');
+                    if (res.message === 'Вход совершен успешно') {
+                        checkToken();
                         Promise.all([api.getUserInfo(), api.getInitialCards()]).then((res) => {
                             setTimeout(setIsLoad, 2000);
                             setTimeout(setSuccessfullLog, 6000);
@@ -191,7 +188,6 @@ function App() {
 
     function deleteToken() {
         setLoggedIn(false)
-        localStorage.removeItem('token');
         history.push('/sign-in');
     }
 
@@ -209,9 +205,9 @@ function App() {
         return () => document.removeEventListener('keyup', closeByEscape)
     }, [selectedCard, isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen])
 
-    function checkToken(localToken) {
+    function checkToken() {
         apiAuth
-            .checkToken(localToken)
+            .checkToken()
             .then((res) => {
                 setLoggedIn(true);
                 setEmail(res.data);
@@ -225,10 +221,8 @@ function App() {
     }
 
     useEffect(() => {
-        if (localStorage.token) {
-            checkToken(localStorage.token);
+            checkToken();
             history.push('/');
-        }
     }, []);
 
     return (
