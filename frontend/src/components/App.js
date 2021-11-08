@@ -223,7 +223,7 @@ function App() {
     useEffect(() => {
             checkToken();
             history.push('/');
-    }, []);
+    }, [], loggedIn);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
