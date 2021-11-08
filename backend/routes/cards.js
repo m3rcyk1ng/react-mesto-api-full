@@ -10,49 +10,31 @@ router.get('/cards', findCards);
 
 router.post('/cards', celebrate({
   // валидируем параметры
-  body: Joi.object()
-    .keys({
-      name: Joi.string()
-        .required()
-        .min(2)
-        .max(30),
-      link: Joi.string()
-        .required()
-        .custom(isUrl),
-    }),
+  body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
+    link: Joi.string().required().custom(isUrl),
+  }),
 }), postCard);
 
 router.delete('/cards/:cardId', celebrate({
   // валидируем параметры
-  params: Joi.object()
-    .keys({
-      cardId: Joi.string()
-        .required()
-        .length(24)
-        .hex(),
-    }),
+  params: Joi.object().keys({
+    cardId: Joi.string().required().hex().length(24),
+  }),
 }), deleteCard);
 
 router.delete('/cards/:cardId/likes', celebrate({
   // валидируем параметры
-  params: Joi.string().hex().length(24).required()
-    .keys({
-      cardId: Joi.string()
-        .required()
-        .length(24)
-        .hex(),
-    }),
+  params: Joi.object().keys({
+    cardId: Joi.string().required().hex().length(24),
+  }),
 }), deleteLike);
 
 router.put('/cards/:cardId/likes', celebrate({
   // валидируем параметры
-  params: Joi.string().hex().length(24).required()
-    .keys({
-      cardId: Joi.string()
-        .required()
-        .length(24)
-        .hex(),
-    }),
+  params: Joi.object().keys({
+    cardId: Joi.string().required().hex().length(24),
+  }),
 }), putLike);
 
 module.exports = router;
