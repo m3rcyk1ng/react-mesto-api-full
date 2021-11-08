@@ -1,0 +1,14 @@
+.popup_type_delete .popup__container {
+    min-height: 180px;
+    display: flex;
+}
+
+.popup_type_delete .popup__title {
+    padding-bottom: 38px;
+}
+
+.popup_type_delete .popup__submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

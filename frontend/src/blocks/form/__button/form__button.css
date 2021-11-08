@@ -1,0 +1,16 @@
+.form__button {
+    width: 358px;
+    height: 50px;
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+.form__button::content {
+    color: black;
+}
+
+.form__button:hover {
+    opacity: 0.85;
+    transition: 0.5s ease;
+}

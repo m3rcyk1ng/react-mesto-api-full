@@ -1,0 +1,7 @@
+.spinner {
+    display: grid;
+    width: 200px;
+    margin: 50px auto 50px;
+    background-color: black;
+    justify-content: center;
+}

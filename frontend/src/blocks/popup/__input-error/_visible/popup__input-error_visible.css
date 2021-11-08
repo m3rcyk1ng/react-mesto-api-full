@@ -1,0 +1,7 @@
+.popup__input-error_visible {
+    margin-top: -20px;
+    margin-left: 33px;
+    margin-bottom: 5px;
+    visibility: visible;
+    opacity: 1;
+}

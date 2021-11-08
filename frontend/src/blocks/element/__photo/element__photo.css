@@ -1,0 +1,18 @@
+.element__photo {
+    width: 100%;
+    min-width: 282px;
+    height: 282px;
+    flex: 0 0 auto;
+    object-fit: cover;
+}
+
+
+
+
+.element__img {
+    width: 100%;
+    min-width: 282px;
+    height: 282px;
+    object-fit: cover;
+    object-position: center;
+}

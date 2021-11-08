@@ -1,0 +1,17 @@
+.popup__field_type_link {
+    width: 358px;
+    height: 27px;
+    margin: 0 auto 33px;
+    font-size: 14px;
+    line-height: 17px;
+    border: none;
+    border-bottom: rgba(0, 0, 0, 0.2) 1px solid;
+    padding-bottom: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__field_type_link {
+        width: 238px;
+        margin-bottom: 45px;
+    }
+}

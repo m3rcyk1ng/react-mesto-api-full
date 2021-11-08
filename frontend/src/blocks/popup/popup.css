@@ -1,0 +1,15 @@
+.popup {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    /* Блок анимации плавного открытия, 2 часть в popup_open */
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s linear, visibility 0s linear;
+}

@@ -1,0 +1,19 @@
+.element__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 282px;
+    height: 282px;
+    background-size: 80px;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url("../../../images/increase.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+}
+
+.element__overlay:hover {
+    opacity: 1;
+    cursor: pointer;
+    transition: all 0.5s ease 1s;
+}

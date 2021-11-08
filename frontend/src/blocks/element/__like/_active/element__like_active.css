@@ -1,0 +1,11 @@
+.element__like_active {
+    background-image: url("../../../../images/like-2.svg");
+    outline: none;
+}
+
+.element__like_active:hover {
+    opacity: 1;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
