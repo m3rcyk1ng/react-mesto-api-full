@@ -11,4 +11,4 @@ IT'S REACT MESTO API FULL FINALLY PROJECT
 ___
 * Фронтенд: debugger.nomoredomains.rocks
 * Бекенд: api.debugger.nomoredomains.rocks
-* IP: 51.250.22.131
+* IP: 51.250.20.78
