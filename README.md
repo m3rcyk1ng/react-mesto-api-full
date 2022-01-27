@@ -1,7 +1,5 @@
-IT'S REACT MESTO API FULL FINALLY PROJECT
-
-Финальный учебный проект Mesto на Реакте с авторизацией и регистрацией.
-![alt text](http://memesmix.net/media/created/lht64r.jpg)
+[![Build Status](https://i.imgur.com/jpIZtTM.png)](https://praktikum.yandex.ru/profile/web/)
+Учебный проект MESTO полностью собранный репозиторий backend + frontend с авторизацией и регистрацией.
 
 * Функционал:
 
@@ -9,6 +7,3 @@ IT'S REACT MESTO API FULL FINALLY PROJECT
 
 * Операции с карточками и пользователями
 ___
-* Фронтенд: debugger.nomoredomains.rocks
-* Бекенд: api.debugger.nomoredomains.rocks
-* IP: 51.250.20.78
